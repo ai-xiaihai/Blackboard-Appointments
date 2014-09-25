@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<manifest>
+  <!-- core extension information -->
+  <plugin>
+    <name value= "OCTET Appointment Tool EX (formally Signup)"/>
+    <handle value= "octetsign"/>
+    <description value= "Apoointment Sign up plugin."/>
+    <version value= "2.0.0.0"/>
+    <requires>
+    	<bbversion value="9.1.110082.0"/>
+    </requires>
+    <vendor>
+      <id value="octt"/>
+      <name value="OCTET"/>
+      <url value="http://www.oberlin.edu/octet/" />
+      <description value="Oberlin Center for Technologically Enhanced Teaching." />
+    </vendor>
+    <http-actions>
+      <remove value="admin/remove.jsp"/>
+    </http-actions>
+    
+
+    <!-- Tools defined by this extension -->
+    <application-defs>
+      <application handle="appointmentsignupEX" type="course" use-ssl="true" name="AppointmentsEX" can-allow-guest="false"
+       small-icon="" large-icon="">
+        <description lang="en_US">Application installed as part of the OCTET Appointment Sign up.</description>
+        <links>
+	  <link>
+            <type value="tool"/>
+            <name value="AppointmentsEX (OCTET)"/>
+            <url value="links/welcome.jsp"/>
+            <description value="A tool which allows users in the course to sign up for an appointment with an instructor or TA." />
+            <icons>
+              <listitem value="images/icon.gif"/>
+            </icons>
+          </link>
+		   </links>
+	  </application>
+	  
+	  <application handle="createappointments" type="course" use-ssl="true" name="Create Appointments" can-allow-guest="false"
+       small-icon="" large-icon="">
+        <description lang="en_US">Application installed as part of the OCTET Appointment Sign up.</description>
+        <links>
+		   <link>
+            <type value="course_tool"/>
+            <name value="Create AppointmentsEX (OCTET)"/>
+            <url value="links/create.jsp"/>
+            <description value="A tool which allows professors to batch-create appointments for students in a course to sign up for." />
+            <icons>
+              <listitem value="images/icon.gif"/>
+            </icons>
+          </link>
+	 </links>
+	  </application>
+   </application-defs>
+    
+    
+    <!-- code permissions required for proper operation -->
+    <permissions>
+      <permission type="persist" name="Content" actions="create,modify,delete"/>
+      <permission type="attribute" name="user.authinfo" actions="get"/>
+	  <permission type="attribute" name="user.personalinfo" actions="get,set" />              
+    </permissions>
+  </plugin>
+
+</manifest>

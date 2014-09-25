@@ -1,0 +1,22 @@
+Uses 3 tables that can be found in the OnCampus.appointment MySQL database on www.oberlin.edu. 
+Username: 
+Password:
+
+Scripts used to process info from Bb into database are found on OCTET1>>Bb>>Ads>>Appointments 
+Locally they are saved on Windows machine in the office under:
+Working Files(F):Websites:OCTET1
+
+Building Block local version on windows machine in office
+Working Files(F):Websites:OCTET1:Building Blocks:OCTET Signup Module
+_________________________-
+
+8/3/2010 - Using files from Building Block and Bb folders found in the F drive>>Websites>>OCTET1- changed the verbiage in the create.jsp file- changed the bb-manifest.xml by commenting out the application that was installed in the application-defs section.
+
+10/27/10 -
+Now that blackboard server is https we should probably change references to http in all building block code.
+
+5/1/12 -
+Needed to check building block in anticipation for upgrade to 9.1 SP8 (or 9).  Doesnt' seem to add timeslots when using the test server. 
+
+10/14/2013
+Looking to fix the fact that all sites need to be https:// rather than http://
