@@ -256,10 +256,22 @@ Make the appointments available<br>
   	<input name="available" type="radio" value="2">
   	across all courses/orgs AND for anyone that logs in (this is still in beta and may not work)</label><br>	
 -->
-
 </bbUI:stepContent>
 </bbUI:step>
-<bbUI:stepSubmit title="Submit" number="4" />
+
+<bbUI:step title="Restrictions" number="4">
+<bbUI:stepContent>
+Indicate whether or not you'd like for students to sign up for only one, or multiple time slots.<br>
+	<label>
+		<input name="timeSlot" type="radio" value="1" checked="checked">
+		Students can only sign-up for one time slot.</label><br>
+	<label>
+		<input name="timeSlot" type="radio" value="0">
+		Students can sign up for multiple time slots.</label><br>
+</bbUI:stepContent>
+</bbUI:step>
+
+<bbUI:stepSubmit title="Submit" number="5" />
 </form>
 </bbUI:coursePage>
 </bbData:context>
