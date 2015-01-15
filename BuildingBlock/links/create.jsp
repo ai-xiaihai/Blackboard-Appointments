@@ -10,6 +10,7 @@
                 blackboard.platform.persistence.*"
         errorPage="/error.jsp"                
 %>
+<%@include file = "config.jsp" %>
 <%@ taglib uri="/bbData" prefix="bbData"%>                
 <%@ taglib uri="/bbUI" prefix="bbUI"%>
 <%
@@ -81,7 +82,7 @@ int currMin = c.get(c.MINUTE);
 int ampm = c.get(c.AM_PM);
 %>
 
-<form action="https://octet1.csr.oberlin.edu/octet/Bb/AppointmentsEX/create.php" method="post" enctype="multipart/form-data" name="form">
+<form action="<%=phpurl%>create.php" method="post" enctype="multipart/form-data" name="form">
 <input type="hidden" name="course_id" value="<%=request.getParameter("course_id")%>">
 <input type="hidden" name="course_name" value="<%=courseName%>">
 <input type="hidden" name="course_cid" value="<%=cId%>">

@@ -10,6 +10,7 @@
                 blackboard.platform.persistence.*"
         errorPage="/error.jsp"            
 %>
+<%@include file = "config.jsp" %>
 <%@ taglib uri="/bbData" prefix="bbData"%>                
 <%@ taglib uri="/bbUI" prefix="bbUI"%>
 <body onLoad="document.form.submit()">
@@ -54,7 +55,7 @@ String cId = thisCourse.getCourseId();
 
 //create a form with the relevant information to pass to the php page
 %>
-<form action="https://octet1.csr.oberlin.edu/octet/Bb/AppointmentsEX/manage.php" method="post" enctype="multipart/form-data" name="form">
+<form action="<%=phpurl%>manage.php" method="post" enctype="multipart/form-data" name="form">
 <input type="hidden" name="uid" value="<%=thisUser.getUserName()%>">
 <input type="hidden" name="course_id" value="<%=request.getParameter("course_id")%>">
 <input type="hidden" name="course_name" value="<%=courseName%>">
