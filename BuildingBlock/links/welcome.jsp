@@ -31,8 +31,7 @@ Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"
 .style1 {
 	font-size: 16px;
 	font-weight: bold;
-}
--->
+} -->
 </style>
 <bbUI:docTemplate title="Sign-up">
 <bbUI:coursePage courseId="<%=courseId%>">

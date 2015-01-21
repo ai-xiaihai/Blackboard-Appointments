@@ -49,6 +49,7 @@ Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"
 
 //load the course object
 Course thisCourse = (Course)courseId.load();
+
 // get the course name and course Id - this is the external Id e.g. "200702-CSCI-151-01"
 String courseName = thisCourse.getTitle();
 String cId = thisCourse.getCourseId();

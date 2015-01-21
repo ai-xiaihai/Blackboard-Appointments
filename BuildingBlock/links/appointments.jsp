@@ -16,6 +16,7 @@
 <body onLoad="document.form.submit()">
 <bbData:context id="ctx">
 <%
+
 /*
  * This page is meant to pull all of the information needed for a student to be able to sign up for an appointment in blackboard.
  * The page which allows them to sign up or view the appointments is view.php
@@ -56,7 +57,6 @@ String cId = thisCourse.getCourseId();
 
 //create a form with all of thise relevant informatino and pass it along to the php page
 %>
-
 <form action="<%=phpurl%>view.php" method="post" name="form">
 <input type="hidden" name="course_id" value="<%=request.getParameter("course_id")%>">
 <input type="hidden" name="course_name" value="<%=courseName%>">
