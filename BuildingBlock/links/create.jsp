@@ -7,7 +7,8 @@
                 blackboard.persist.user.*,
 				blackboard.persist.course.*,
                 blackboard.platform.*,
-                blackboard.platform.persistence.*"
+                blackboard.platform.persistence.*,
+                blackboard.platform.plugin.PlugInUtil"
         errorPage="/error.jsp"                
 %>
 <%@include file = "config.jsp" %>
@@ -18,6 +19,7 @@
  * Date and time form can be replaced by date picker from the bbUI tag library
  * in a future version.
  */
+String bburl = PlugInUtil.getUri("octt","octetsign","links/");
 //create a persistence manager - needed if we want to load anything with a DbLoader
 BbPersistenceManager bbPm = BbServiceManager.getPersistenceService().getDbPersistenceManager();
 
@@ -45,7 +47,7 @@ Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"
  <bbUI:breadcrumb>Create Appointments</bbUI:breadcrumb>
 </bbUI:breadcrumbBar>
 <div align="right" class="style3">
-<a href="manage.jsp?course_id=<%=request.getParameter("course_id")%>">
+<a href="<%=bburl%>manage.jsp?course_id=<%=request.getParameter("course_id")%>">
 MANAGE APPOINTMENTS</a>
 </div>
 <bbUI:titleBar iconUrl="/images/ci/icons/calendar_u.gif">Create Appointments</bbUI:titleBar>
@@ -58,6 +60,8 @@ String strUsername = thisUser.getUserName();
 
 // creates a DbLoader for users
 UserDbLoader loader = (UserDbLoader) bbPm.getLoader( UserDbLoader.TYPE );
+//creates a CourseDBLoader 
+CourseDbLoader courseloader = (CourseDbLoader) bbPm.getLoader(CourseDbLoader.TYPE);
 // use the loader to load the full user object for this user
 blackboard.data.user.User userBb = loader.loadByUserName(strUsername);
 //get certain user attributes
@@ -246,11 +250,25 @@ Make each appointment last
 <bbUI:step title="Availability" number="3">
 <bbUI:stepContent>
 Make the appointments available<br>
+<!-- load courses by professor, make button for each course-->
+<% 
+	BbList<Course> courselist = courseloader.loadByUserIdAndCourseMembershipRole(thisUser.getId(), CourseMembership.Role.INSTRUCTOR);
+	BbList.Iterator<Course> courseit = courselist.getFilteringIterator();
+	int coursenum = 1;
+	while(courseit.hasNext()){
+		Course curcourse =  courseit.next();
+%>
+
+  	<input id="Course<%=coursenum%>" type="checkbox" name="course" value="<%=curcourse.getCourseId()%>" >
+  	<label for="Course<%=coursenum%>"><%=curcourse.getTitle()%></label><br>
+<%
+  	coursenum++;
+  	}
+%>
+
+<!-- assumes not checking above courses-->
   <label>
-  	<input name="available" type="radio" value="1" checked="checked">
-  	just for this course/organization</label><br>
-  <label>
-  	<input type="radio" name="available" value="0">
+  	<input type="checkbox" name="course" value="all">
   	for all of my courses/organizations where I am a leader or an assistant</label>.<br>
 <!-- Still working on this. It seems that providing the faculty with a simple URL may make this possible.
 <label>

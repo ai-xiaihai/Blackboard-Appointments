@@ -7,9 +7,11 @@
                 blackboard.persist.user.*,
 				blackboard.persist.course.*,
                 blackboard.platform.*,
-                blackboard.platform.persistence.*"
+                blackboard.platform.persistence.*,
+                blackboard.platform.plugin.PlugInUtil"
         errorPage="/error.jsp"                
 %>
+<%@include file = "config.jsp" %>
 <%@ taglib uri="/bbData" prefix="bbData"%>                
 <%@ taglib uri="/bbUI" prefix="bbUI"%>
 <bbData:context id="ctx">
@@ -19,7 +21,7 @@
  * with whom they wish to set up an appointment.
  * Instructors get additional optiona which allow them to create appointments or manage their existing appointments.
  */
-
+String bburl = PlugInUtil.getUri("octt","octetsign","links/");
 //create a persistence manager - needed if we want to load anything with a DbLoader
 BbPersistenceManager bbPm = BbServiceManager.getPersistenceService().getDbPersistenceManager();
 
@@ -97,7 +99,7 @@ while(instIter.hasNext())
 	User thisUser = (User)instIter.next();
 	i++;
 	%>
-     <a href="appointments.jsp?uid=<%=thisUser.getUserName() %>&course_id=<%=request.getParameter("course_id")%>"><%=thisUser.getGivenName() %>&nbsp <%=thisUser.getFamilyName() %></a>
+     <a href="<%=bburl%>appointments.jsp?uid=<%=thisUser.getUserName() %>&course_id=<%=request.getParameter("course_id")%>"><%=thisUser.getGivenName() %>&nbsp <%=thisUser.getFamilyName() %></a>
 	 <br>
 	<%
 }
@@ -105,8 +107,8 @@ while(instIter.hasNext())
 if(manageEnabled){
 	%>
 	<br><br><br>
-	<a href="manage.jsp?course_id=<%=request.getParameter("course_id")%>">Manage existing appointments</a> or 
-	<a href="create.jsp?course_id=<%=request.getParameter("course_id")%>">Create new appointments</a>
+	<a href="<%=bburl%>manage.jsp?course_id=<%=request.getParameter("course_id")%>">Manage existing appointments</a> or 
+	<a href="<%=bburl%>create.jsp?course_id=<%=request.getParameter("course_id")%>">Create new appointments</a>
 	<%
 }
 %>
