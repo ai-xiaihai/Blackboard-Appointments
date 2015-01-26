@@ -4,3 +4,6 @@
 
 # config file #
 config.jsp
+
+# zip files #
+*.zip
