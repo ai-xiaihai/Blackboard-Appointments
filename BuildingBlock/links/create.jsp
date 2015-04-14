@@ -158,6 +158,7 @@ You have the ability to create multiple appointments at once. Select the date as
     <td>Start Time</td>
     <td>
 	<select name="shour" id="shour">
+	<%-- HAS THIS ESTEEMED COLLEAGUE EVER OF FOR LOOPS I MEAN REALLY COME ONE --%>
 	  <option value="1" <% if(currHour==1)out.print("selected");%>>01</option>
 	  <option value="2" <% if(currHour==2)out.print("selected");%>>02</option>
 	  <option value="3" <% if(currHour==3)out.print("selected");%>>03</option>
