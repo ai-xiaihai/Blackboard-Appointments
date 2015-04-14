@@ -249,11 +249,11 @@ Make each appointment last
 <bbUI:stepContent>
 Make the appointments available<br>
   <label>
-  	<input name="available" type="radio" value="1" checked="checked">
-  	just for this course/organization</label><br>
+  	<input name="courseIDs[]" type="radio" value="DIRECTORY">
+  	Check this to show link in directory tool</label><br>
   <label>
-  	<input type="radio" name="available" value="0">
-  	for all of my courses/organizations where I am a leader or an assistant</label>.<br>
+  	<input name="available" type="radio" value="0">
+  	Show links in all courses</label>.<br>
 <!-- Still working on this. It seems that providing the faculty with a simple URL may make this possible.
 <label>
   	<input name="available" type="radio" value="2">
