@@ -165,7 +165,6 @@ You have the ability to create multiple appointments at once. Select the date as
     <td>Start Time</td>
     <td>
 	<select name="shour" id="shour">
-	<%-- HAS THIS ESTEEMED COLLEAGUE EVER HEARD OF FOR LOOPS I MEAN REALLY COME ONE --%>
 	  <option value="1" <% if(currHour==1)out.print("selected");%>>01</option>
 	  <option value="2" <% if(currHour==2)out.print("selected");%>>02</option>
 	  <option value="3" <% if(currHour==3)out.print("selected");%>>03</option>
@@ -259,15 +258,14 @@ Make each appointment last
 <bbUI:stepContent>
 Make the appointments available<br>
   <label>
-<<<<<<< HEAD
   	<input name="courseIDs[]" type="checkbox" value="DIRECTORY">
   	Show in directory tool</label><br>
   <label>
-  	<input name="courseIDs[]" type="radio" value="ALL" checked onchange="checkAll()"> <%--default = checked --%>
-  	Available for all courses/ organizations</label>.<br>
+  	<input name="courseIDs[]" type="radio" value="ALL" onchange="checkAll()"> <%--default = checked --%>
+  	Available for all courses/organizations</label>.<br>
   <label>
-  	<input name="courseIDs[]" type="radio" id="selectCourse" onchange="checkAll()">
-  	Available in selected courses/ organizations</label>.<br>
+  	<input name="courseIDs[]" type="radio" id="selectCourse" checked onchange="checkAll()">
+  	Available in selected courses/organizations</label>.<br>
 <%--Will list out the available courses you are an instructor for.--%>
 <%--Personal note: using < % and % > gets into javascript coding mode. --%>
 <%-- course.getCourseId() gets the id of the course within courses. getTitle() then print the name of the course --%>
@@ -276,7 +274,7 @@ Make the appointments available<br>
 <%--list all courses if the previous box was checked--%>
 <%--part will only appear if above is checked--%>
 
-<div id="courseList" style="display: none; position: absolute; left: 100px;">
+<div id="courseList" style="visibility: visible; position: relative; left: 25px;">
 <% for (Course course: courses){ %>
 	<input type="checkbox" name="courseIDs[]" value=<%=course.getCourseId()%>> <%=course.getTitle()%><br>
 <% } %>
@@ -285,25 +283,13 @@ Make the appointments available<br>
 <script>
 function checkAll() {
 	if (document.getElementById("selectCourse").checked){
-		document.getElementById("courseList").style.display = "inline";
+		document.getElementById("courseList").style.visibility = "visible";
 	}
 	else {
-		document.getElementById("courseList").style.display = "none";
+		document.getElementById("courseList").style.visibility = "hidden";
 	}
 }
 </script>
-=======
-  	<input name="courseIDs[]" type="radio" value="DIRECTORY">
-  	Check this to show link in directory tool</label><br>
-  <label>
-  	<input name="available" type="radio" value="0">
-  	Show links in all courses</label>.<br>
-<!-- Still working on this. It seems that providing the faculty with a simple URL may make this possible.
-<label>
-  	<input name="available" type="radio" value="2">
-  	across all courses/orgs AND for anyone that logs in (this is still in beta and may not work)</label><br>	
--->
->>>>>>> origin/master
 </bbUI:stepContent>
 </bbUI:step>
 
