@@ -23,6 +23,9 @@ String bburl = PlugInUtil.getUri("octt","octetsign","links/");
 //create a persistence manager - needed if we want to load anything with a DbLoader
 BbPersistenceManager bbPm = BbServiceManager.getPersistenceService().getDbPersistenceManager();
 
+// creates a course loader
+CourseDbLoader courseLoader = (CourseDbLoader)bbPm.getLoader(CourseDbLoader.TYPE);
+
 // get the course Id for the current course that we are in - this is the internal id e.g. "_2345_1"
 Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id")); 
 %>
@@ -54,7 +57,11 @@ MANAGE APPOINTMENTS</a>
 
 <%
 //get the current user logged into blackboard
-User thisUser = ctx.getUser();
+User thisUser = ctx.getUser(); // professor. To get userID, thisUser.getID
+
+// gets the list of courses that have this instructor
+BbList<Course> courses = courseLoader.loadByUserIdAndCourseMembershipRole(thisUser.getId(), CourseMembership.Role.INSTRUCTOR);
+
 //get this user's username
 String strUsername = thisUser.getUserName();
 
@@ -230,6 +237,7 @@ You have the ability to create multiple appointments at once. Select the date as
   </tr>
 </table></bbUI:stepContent>
 </bbUI:step>
+
 <bbUI:step title="Time Interval" number="2">
 <bbUI:stepContent>How long should each appointment be?<br>
 Make each appointment last 
@@ -245,20 +253,43 @@ Make each appointment last
  </select>  minutes.
  </bbUI:stepContent>
 </bbUI:step>
+
 <bbUI:step title="Availability" number="3">
 <bbUI:stepContent>
 Make the appointments available<br>
   <label>
-  	<input name="available" type="radio" value="1" checked="checked">
-  	just for this course/organization</label><br>
+  	<input name="courseIDs[]" type="checkbox" value="DIRECTORY">
+  	Show in directory tool</label><br>
   <label>
-  	<input type="radio" name="available" value="0">
-  	for all of my courses/organizations where I am a leader or an assistant</label>.<br>
-<!-- Still working on this. It seems that providing the faculty with a simple URL may make this possible.
-<label>
-  	<input name="available" type="radio" value="2">
-  	across all courses/orgs AND for anyone that logs in (this is still in beta and may not work)</label><br>	
--->
+  	<input name="courseIDs[]" type="radio" value="ALL" checked onchange="checkAll()"> <%--default = checked --%>
+  	Available for all courses/ organizations</label>.<br>
+  <label>
+  	<input name="courseIDs[]" type="radio" id="selectCourse" onchange="checkAll()">
+  	Available in selected courses/ organizations</label>.<br>
+<%--Will list out the available courses you are an instructor for.--%>
+<%--Personal note: using < % and % > gets into javascript coding mode. --%>
+<%-- course.getCourseId() gets the id of the course within courses. getTitle() then print the name of the course --%>
+<%-- we don't use cId or any of the variables above because they refer to only one course that we're in, not what we have in courses --%>
+
+<%--list all courses if the previous box was checked--%>
+<%--part will only appear if above is checked--%>
+
+<div id="courseList" style="display: none; position: absolute; left: 100px;">
+<% for (Course course: courses){ %>
+	<input type="checkbox" name="courseIDs[]" value=<%=course.getCourseId()%>> <%=course.getTitle()%><br>
+<% } %>
+</div>
+
+<script>
+function checkAll() {
+	if (document.getElementById("selectCourse").checked){
+		document.getElementById("courseList").style.display = "inline";
+	}
+	else {
+		document.getElementById("courseList").style.display = "none";
+	}
+}
+</script>
 </bbUI:stepContent>
 </bbUI:step>
 
@@ -271,6 +302,7 @@ Indicate whether or not you'd like for students to sign up for only one, or mult
 	<label>
 		<input name="timeSlot" type="radio" value="0">
 		Students can sign up for multiple time slots.</label><br>
+	
 </bbUI:stepContent>
 </bbUI:step>
 
