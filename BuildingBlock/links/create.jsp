@@ -165,6 +165,7 @@ You have the ability to create multiple appointments at once. Select the date as
     <td>Start Time</td>
     <td>
 	<select name="shour" id="shour">
+	<%-- HAS THIS ESTEEMED COLLEAGUE EVER HEARD OF FOR LOOPS I MEAN REALLY COME ONE --%>
 	  <option value="1" <% if(currHour==1)out.print("selected");%>>01</option>
 	  <option value="2" <% if(currHour==2)out.print("selected");%>>02</option>
 	  <option value="3" <% if(currHour==3)out.print("selected");%>>03</option>
@@ -258,6 +259,7 @@ Make each appointment last
 <bbUI:stepContent>
 Make the appointments available<br>
   <label>
+<<<<<<< HEAD
   	<input name="courseIDs[]" type="checkbox" value="DIRECTORY">
   	Show in directory tool</label><br>
   <label>
@@ -290,6 +292,18 @@ function checkAll() {
 	}
 }
 </script>
+=======
+  	<input name="courseIDs[]" type="radio" value="DIRECTORY">
+  	Check this to show link in directory tool</label><br>
+  <label>
+  	<input name="available" type="radio" value="0">
+  	Show links in all courses</label>.<br>
+<!-- Still working on this. It seems that providing the faculty with a simple URL may make this possible.
+<label>
+  	<input name="available" type="radio" value="2">
+  	across all courses/orgs AND for anyone that logs in (this is still in beta and may not work)</label><br>	
+-->
+>>>>>>> origin/master
 </bbUI:stepContent>
 </bbUI:step>
 
