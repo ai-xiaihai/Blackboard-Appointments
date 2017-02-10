@@ -27,9 +27,7 @@ if(strpos($_SERVER["HTTP_REFERER"], "http://octet1.csr.oberlin.edu/octet/Bb/Appo
 </style>
 </head>
 <body>
-<span class="style1"><br>&nbsp;&nbsp;<a href="<?php echo $url;?>/webapps/blackboard/execute/courseMain?course_id=<?php echo $_POST["course_id"]; ?>" target="_self">
-<?php echo strtoupper($_POST["course_name"]." (".$_POST["course_cid"].")"); ?></a> > 
-<a href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_POST["course_id"]; ?>">APPOINTMENTS</a> > CANCEL</span><br>
+<span class="style1"><br>&nbsp;&nbsp;<?php include("bread.php"); ?> > CANCEL</span><br>
 <span class="style6">
 <?php 
 //code here
@@ -165,7 +163,15 @@ if($appt = mysql_fetch_assoc(mysql_query($sql, $connection)) ){
  <div align="left">
  <img src="images/ok_off.gif" border="0" usemap="#Map">
  <map name="Map">
-   <area shape="rect" coords="2,-2,66,23" href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_POST["course_id"]; ?>">
+   <area shape="rect" coords="2,-2,66,23" href="<?php 
+if ( $_POST["course_id"] != "null" ) {
+	echo $url;
+	echo "/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=";
+	echo $_POST["course_id"];
+}else{
+	echo "https://blackboard.oberlin.edu/";
+}
+?>">
  </map>
  </div>
  </td></tr></table>
