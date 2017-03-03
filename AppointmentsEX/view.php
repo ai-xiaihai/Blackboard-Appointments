@@ -182,7 +182,7 @@ if($num_appts < 1)
 ?>
  <span class="style6"><br>
  <br>
- &nbsp;&nbsp;This instructor does not have any available appointments in the database.<br>
+ &nbsp;&nbsp;This instructor does not have any appointments for you to sign up.<br>
  </span> <?php
 }
 ?>

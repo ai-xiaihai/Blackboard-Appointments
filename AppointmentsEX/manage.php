@@ -150,13 +150,33 @@ if($num_appts < 1)
  <div align="right">
  <img src="images/ok_off.gif" border="0" usemap="#Map">
  <map name="Map">
-   <area shape="rect" coords="2,-2,66,23" href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_POST["course_id"]; ?>">
+   <area shape="rect" coords="2,-2,66,23" href="<?php 
+	if ( $_POST["course_id"] != "null" ) {
+		echo $url;
+		echo "/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=";
+		echo $_POST["course_id"];
+	}else{
+		echo "https://blackboard.oberlin.edu/";
+	}?>">
  </map>
  </div>
  </td></tr></table>
 
-<p><a href="manageviewPast.php?uid=<?php echo $_POST['uid']; ?>&course_id='<?php echo $_POST['course_id']; ?>'&course_cid='<?php echo $_POST['course_cid']; ?>'&course_id='<?php echo $_POST['course_id']; ?>'&course_name='<?php echo $_POST['course_name']; ?>'" target="list">view past appointments </a><br>
+<p><?php
+if ( $_POST["course_id"] != "null" ){
+	// if no course_id, then no past appiontments
+	echo "<a href="."manageviewPast.php?uid=".$_POST['uid'];
+	echo "&course_id=".$_POST['course_id'];
+	echo "&course_cid=".$_POST['course_cid'];
+	echo "&course_id=".$_POST['course_id']; 
+	echo '&course_name='.$_POST['course_name'];
+	echo ' target="list">view past appointments </a><br>';
+	// if no course_id, then cannot create new appiontments
+	echo "<a href=".$url;
+	echo "/webapps/octt-octetsign-bb_bb60/links/create.jsp?course_id=";
+	echo $_POST["course_id"];
+	echo ' target="list">create new appointments </a><br>';
+}?>
   <span class="style9"><em>will open in a new window</span></p>
-
 </body>
 </html>

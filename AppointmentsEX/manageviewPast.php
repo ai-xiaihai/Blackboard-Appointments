@@ -140,7 +140,7 @@ if($num_appts < 1)
  <div align="right">
  <img src="images/ok_off.gif" border="0" usemap="#Map">
  <map name="Map">
-   <area shape="rect" coords="2,-2,66,23" href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_GET["course_id"]; ?>">
+   <area shape="rect" coords="2,-2,66,23" href="<?php echo $url;?>">
  </map>
  </div>
  </td></tr></table>

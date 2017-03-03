@@ -26,10 +26,7 @@ if(strpos($_SERVER["HTTP_REFERER"], "http://octet1.csr.oberlin.edu/octet/Bb/Appo
 </style>
 </head>
 <body>
-<span class="style1"><br>
-&nbsp;&nbsp;<a href="<?php echo $url;?>/webapps/blackboard/execute/courseMain?course_id=<?php echo $_POST["course_id"]; ?>" target="_self">
-  <?php echo strtoupper($_POST["course_name"]." (".$_POST["course_cid"].")"); ?></a> > 
-  <a href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_POST["course_id"]; ?>">APPOINTMENTS</a> > CANCEL</span><br>
+<span class="style1"><br>&nbsp;&nbsp;<?php include("bread.php"); ?> > Appt Owner Cancel</span><br>
   <span class="style6">
   <?php
 //process only if referer is correct
@@ -74,20 +71,17 @@ if($appt = mysql_fetch_assoc(mysql_query($sql, $connection)) ){
 						\nIf you would still like to meet with ".stripslashes($professor['name']).", please go back into the course 
 						\nthey are teaching and select an alternative time from the available appointments.
 						\nThis is an automatically generated email. To reply please email ".stripslashes($professor['name'])." at ".$from;
+					echo "Processing a professor request to cancel appointment...\n"; 
 					if(mail($to, $subject, $contents, $headers)){
 						echo "An email has been sent to the student notifying them of the cancellation.<br>";
-					}
-					else{
+					}else{
 						echo "Could not send an email to the student. Please notify the student of the cancellation.<br>";
 					}
-				}
-				else{
+				}else{
 					echo "Unable to find instructor's information in the database.<br>";
 				}
-			}
-			else
-			{
-			 echo "There has been an error in the database. This appointment is not associated with any instructor.<br>";
+			}else{
+				echo "There has been an error in the database. This appointment is not associated with any instructor.<br>";
 			}
 		}
 		else{
