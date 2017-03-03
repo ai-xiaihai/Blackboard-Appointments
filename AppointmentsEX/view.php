@@ -28,12 +28,11 @@ table-layout:fixed;
 </head>
 <body>
 <!-- simulate breadcrumbBar -->
-<span class="style1">&nbsp;&nbsp;<a href="<?php echo $url;?>/webapps/blackboard/execute/courseMain?course_id=<?php echo $_POST["course_id"]; ?>" target="_self">
-<?php echo strtoupper($_POST["course_name"]." (".$_POST["course_cid"].")"); ?></a> > 
-<a href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_POST["course_id"]; ?>">APPOINTMENTS</a> > View & Sign up &nbsp;&nbsp;</span><br>
-<br>
+<span class="style1">&nbsp;&nbsp;<?php include("bread.php"); ?> > View & Sign up &nbsp;&nbsp;</span><br> <br>
+
 <div width="900"  border="0" class="style6">
-To sign up for an appointment click the "Sign up" button at the end of the appropriate row. <br/>
+To sign up for an appointment click the "Sign up" button at the end of the appropriate row. <br/> <br/>
+You are in a new page now, simply close the page to leave. <br/>
 </div>
 <?php
 //pull up a list of appointment entries from the database
@@ -183,7 +182,7 @@ if($num_appts < 1)
 ?>
  <span class="style6"><br>
  <br>
- &nbsp;&nbsp;This instructor does not have any available appointments in the database.<br>
+ &nbsp;&nbsp;This instructor does not have any appointments for you to sign up.<br>
  </span> <?php
 }
 ?>
@@ -191,7 +190,20 @@ if($num_appts < 1)
  <div align="right">
  <img src="images/ok_off.gif" border="0" usemap="#Map">
  <map name="Map">
-   <area shape="rect" coords="2,-2,66,23" href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_POST["course_id"]; ?>">
+ <!-- Using php, check if course_id is null,
+	if yes, change link to blackboard home 
+-->
+   <area shape="rect" coords="2,-2,66,23" href="
+<?php 
+if ( $_POST["course_id"] != "null" ) {
+	echo $url;
+	echo "/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=";
+	echo $_POST["course_id"];
+}else{
+	echo "https://blackboard.oberlin.edu/";
+}
+?>">
+
  </map>
  </div>
  </td></tr></table>
