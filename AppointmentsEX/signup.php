@@ -27,9 +27,9 @@ if(strpos($_SERVER["HTTP_REFERER"], "http://octet1.csr.oberlin.edu") == 0){ // m
 </style>
 </head>
 <body>
-<span class="style1">&nbsp;&nbsp;<a href="<?php echo $url;?>/webapps/blackboard/execute/courseMain?course_id=<?php echo $_POST["course_id"]; ?>" target="_self">
-<?php echo strtoupper($_POST["course_name"]." (".$_POST["course_cid"].")"); ?></a> > 
-<a href="<?php echo $url;?>/webapps/octt-octetsign-bb_bb60/links/welcome.jsp?course_id=<?php echo $_POST["course_id"]; ?>">APPOINTMENTS</a> > SIGN UP</span><br>
+<!-- simulate breadcrumbBar -->
+<span class="style1">&nbsp;&nbsp; <?php include("bread.php"); ?> > SIGN UP</span><br>
+
 <span class="style6">
 <br>
 <?php
@@ -134,7 +134,7 @@ if(strpos($_SERVER["HTTP_REFERER"], "http://octet1.csr.oberlin.edu") == 0){ // m
 	?>
 </span>
 <form action="addComment.php" method="post" name="comment" id="comment">
-  <p class="style9">If you would like to add a comment to the instructor do so here and click on 'Add Comment'(optional). Otherwise, select OK to return to course. </p>
+  <p class="style9">If you would like to add a comment to the instructor do so here and click on 'Add Comment'(optional). Otherwise, simply close the page to leave. </p>
   <p class="style6">Comment:<br>
   <textarea name="comment" cols="40" rows="3" id="comment"></textarea>
   <input type="hidden" name="course_name" value="<?php echo $_POST["course_name"]; ?>">

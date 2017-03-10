@@ -209,6 +209,7 @@ include("connection.php");?>
  </div>
  </td></tr></table>
  -->
-<p> Use the Appointments breadcrumb link at the top of the page to navigate back to the Appointment section.</p>
+<p> Use the Appointments breadcrumb link at the top of the page to navigate back to the Appointment section. <br>
+Or, go back to your <a href="https://blackboard.oberlin.edu">home page</a>. </p>
 </body>
 </html>

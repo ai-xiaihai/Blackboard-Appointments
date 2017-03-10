@@ -40,20 +40,26 @@ CourseDbLoader cLoader = (CourseDbLoader) bbPm.getLoader( CourseDbLoader.TYPE );
 // use the loader to load the full user object for this user
 blackboard.data.user.User userBb = loader.loadByUserName(strUsername);
 
-//get certain user attributes
+// get certain user attributes
 String email = userBb.getEmailAddress();
 String fname = userBb.getGivenName();
 String lname = userBb.getFamilyName();
 String name = fname+" "+lname;
 
-// get the course Id for the current course that we are in - this is the internal id e.g. "_2345_1"
-Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"));
+// default value for courseName and cId
+String courseName = request.getParameter("uid") + " \'s appointments";
+String cId = "OCTET";
+// if-else block to catch empty course_id to prevent Exceptions
+if ( request.getParameter("course_id") != null ) {
+        // get the course Id for the current course that we are in - this is the internal id e.g. "_2345_1"
+        Id courseId = bbPm.generateId(Course.DATA_TYPE, request.getParameter("course_id"));
 
-//load the course object
-Course thisCourse = (Course)courseId.load();
-// get the course name and course Id - this is the external Id e.g. "200702-CSCI-151-01"
-String courseName = thisCourse.getTitle();
-String cId = thisCourse.getCourseId();
+        // load the course object
+        Course thisCourse = (Course)courseId.load(); 
+        // get the course name and course Id - this is the external Id e.g. "200702-CSCI-151-01"
+        courseName = thisCourse.getTitle();
+        cId = thisCourse.getCourseId();
+} 
 
 //create a form with all of thise relevant informatino and pass it along to the php page
 %>
