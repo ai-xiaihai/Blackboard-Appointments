@@ -128,7 +128,7 @@ while($appts = mysql_fetch_array($result)){// for every appointment in the datab
 			$res = mysql_query($q, $connection);
 			$student = mysql_fetch_assoc($res);
 			//display the results
-			echo " <img src='https://octet1.csr.oberlin.edu/octet/Bb/Photos/expo/".$st['student']."/profileImage' align='left' width='25' height='25'border='1'>Taken by:<br/> ".$student['name']."</td>
+			echo " <img src='https://idcard.oberlin.edu/feed/photo/profile.php?id=".$st['student']."' align='left' width='25' height='25'border='1'>Taken by:<br/> ".$student['name']."</td>
 			<td>";
 			//If the student who has signed up is the one that is logged in, allow them to cancel their appointment.
 			if($st['student']==substr($_POST['username'], 0, 8))
